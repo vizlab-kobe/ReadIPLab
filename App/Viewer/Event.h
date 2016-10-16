@@ -2,33 +2,26 @@
 #include <kvs/glut/Label>
 #include <kvs/KeyPressEventListener>
 #include <kvs/PaintEventListener>
-#include <Lib/IPLab.h>
-#include <Lib/IPLabList.h>
-#include <Lib/Importer.h>
-#include "Input.h"
+#include "Data.h"
 
 
 class PaintEvent : public kvs::PaintEventListener
 {
 private:
-    ReadIPLab::IPLab& m_ipl;
-    Input& m_input;
+    Data& m_data;
     kvs::glut::Label& m_label;
 
 public:
-    PaintEvent( ReadIPLab::IPLab& ipl, Input& input, kvs::glut::Label& label );
+    PaintEvent( Data& data, kvs::glut::Label& label );
     void update();
 };
 
 class KeyPressEvent : public kvs::KeyPressEventListener
 {
 private:
-    ReadIPLab::IPLabList& m_ipl_list;
-    ReadIPLab::IPLab& m_ipl;
-    Input& m_input;
+    Data& m_data;
 
 public:
-
-    KeyPressEvent( ReadIPLab::IPLabList& ipl_list, ReadIPLab::IPLab& ipl, Input& input );
+    KeyPressEvent( Data& data );
     void update( kvs::KeyEvent* event );
 };
