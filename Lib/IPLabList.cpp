@@ -21,7 +21,7 @@ bool IPLabList::read( const std::string& dirname )
     return true;
 }
 
-IPLab IPLabList::load( const size_t index )
+IPLab IPLabList::load( const size_t index ) const
 {
     IPLab ipl;
     ipl.read( m_filenames[index] );

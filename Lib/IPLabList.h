@@ -20,7 +20,7 @@ public:
     const std::string& filename( const size_t index ) const { return m_filenames[index]; }
 
     bool read( const std::string& dirname );
-    IPLab load( const size_t index );
+    IPLab load( const size_t index ) const;
 };
 
 } // end of namespace ReadIPLab

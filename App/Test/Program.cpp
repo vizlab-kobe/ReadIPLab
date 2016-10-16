@@ -10,19 +10,11 @@
 #include <kvs/Indent>
 #include <Lib/IPLab.h>
 #include <Lib/IPLabList.h>
+#include <Lib/Importer.h>
 
 
 namespace
 {
-
-kvs::ImageObject* GetImageObject( const ReadIPLab::IPLab& ipl, const size_t index )
-{
-    kvs::ImageObject* object = new kvs::ImageObject();
-    object->setName( "Image" );
-    object->setSize( ipl.width(), ipl.height() );
-    object->setPixels( ipl.data( index ), kvs::ImageObject::Gray8 );
-    return object;
-}
 
 struct Parameter
 {
@@ -158,7 +150,7 @@ int Program::exec( int argc, char** argv )
     ReadIPLab::IPLabList ipl_list( parameter.dirname );
     ReadIPLab::IPLab ipl = ipl_list.load( parameter.tindex );
 
-    kvs::ImageObject* image = ::GetImageObject( ipl, parameter.sindex );
+    kvs::ImageObject* image = ReadIPLab::ImportImageObject( ipl, parameter.sindex );
     screen.registerObject( image );
 
     kvs::glut::Label label( &screen );
