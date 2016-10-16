@@ -27,6 +27,7 @@ int Program::exec( int argc, char** argv )
     screen.registerObject( image );
 
     kvs::glut::Label label( &screen );
+    label.setMargin( 10 );
     label.setTextColor( kvs::RGBColor::White() );
     label.show();
 

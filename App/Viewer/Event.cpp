@@ -6,12 +6,6 @@ PaintEvent::PaintEvent( ReadIPLab::IPLab& ipl, Input& input, kvs::glut::Label& l
     m_input( input ),
     m_label( label )
 {
-    m_label.setMargin( 10 );
-    m_label.setText("Data: %s", kvs::File( m_input.dirname ).baseName().c_str() );
-    m_label.addText("Width: %d", m_ipl.width() );
-    m_label.addText("Height: %d", m_ipl.height() );
-    m_label.addText("Time index: %d", m_input.tindex );
-    m_label.addText("Slice index: %d", m_input.sindex );
 }
 
 void PaintEvent::update()
