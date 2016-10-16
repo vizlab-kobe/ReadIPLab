@@ -16,14 +16,9 @@ int Program::exec( int argc, char** argv )
     kvs::glut::Application app( argc, argv );
     kvs::glut::Screen screen( &app );
 
-    kvs::CommandLine commandline( argc, argv );
-    commandline.addHelpOption();
-    commandline.addOption( "t","Time index (default: 0).", 1, false );
-    commandline.addOption( "s","Slice index (default: 0).", 1, false );
-    commandline.addValue( "Input directory", true );
-    if ( !commandline.parse() ) { return 1; }
+    Input input( argc, argv );
+    if ( !input.parse() ) { return 1; }
 
-    Input input( commandline );
     ReadIPLab::IPLabList ipl_list( input.dirname );
     ReadIPLab::IPLab ipl = ipl_list.load( input.tindex );
 

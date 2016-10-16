@@ -6,11 +6,16 @@
 
 struct Input
 {
+private:
+    kvs::CommandLine m_commandline;
+
+public:
+
     int tindex; // time index
     int sindex; // slice index
     std::string dirname; // directory name
 
-    Input( const kvs::CommandLine& commandline );
-    void read( const kvs::CommandLine& commandline );
+    Input( int argc, char** argv );
+    bool parse();
     void print( std::ostream& os, const kvs::Indent& indent ) const;
 };

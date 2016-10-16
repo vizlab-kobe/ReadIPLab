@@ -1,19 +1,27 @@
 #include "Input.h"
 
 
-Input::Input( const kvs::CommandLine& commandline ):
+Input::Input( int argc, char** argv ):
     tindex( 0 ),
     sindex( 0 ),
     dirname( "" )
 {
-    this->read( commandline );
+    m_commandline = kvs::CommandLine( argc, argv );
+    m_commandline.addHelpOption();
+    m_commandline.addOption( "t","Time index (default: 0).", 1, false );
+    m_commandline.addOption( "s","Slice index (default: 0).", 1, false );
+    m_commandline.addValue( "Input directory", true );
 }
 
-void Input::read( const kvs::CommandLine& commandline )
+bool Input::parse()
 {
-    if ( commandline.hasOption("t") ) tindex = commandline.optionValue<int>("t");
-    if ( commandline.hasOption("s") ) sindex = commandline.optionValue<int>("s");
-    if ( commandline.hasValues() ) dirname = commandline.value<std::string>();
+    if ( !m_commandline.parse() ) { return false; }
+
+    if ( m_commandline.hasOption("t") ) tindex = m_commandline.optionValue<int>("t");
+    if ( m_commandline.hasOption("s") ) sindex = m_commandline.optionValue<int>("s");
+    if ( m_commandline.hasValues() ) dirname = m_commandline.value<std::string>();
+
+    return true;
 }
 
 void Input::print( std::ostream& os, const kvs::Indent& indent ) const
