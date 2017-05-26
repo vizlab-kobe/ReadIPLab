@@ -1,9 +1,9 @@
 #include <kvs/glut/Application>
 #include <kvs/glut/Screen>
 #include <kvs/ImageObject>
-#include <Lib/IPLab.h>
-#include <Lib/IPLabList.h>
-#include <Lib/Importer.h>
+#include <kvs/ImageImporter>
+#include <kvs/IPLab>
+#include <kvs/IPLabList>
 #include <iostream>
 
 
@@ -21,11 +21,12 @@ int main( int argc, char** argv )
     std::cout << "Slice index: " << sindex << std::endl;
 
     // Read IPLab image dataset
-    ReadIPLab::IPLabList ipl_list( dirname );
-    ReadIPLab::IPLab ipl = ipl_list.load( tindex );
+    kvs::IPLabList ipl_list( dirname );
+    kvs::IPLab ipl = ipl_list.load( tindex );
+    ipl.setImportingFrameIndex( sindex );
 
     // Import and register image object
-    kvs::ImageObject* image = ReadIPLab::ImportImageObject( ipl, sindex );
+    kvs::ImageObject* image = new kvs::ImageImporter( &ipl );
     screen.registerObject( image );
     screen.show();
 

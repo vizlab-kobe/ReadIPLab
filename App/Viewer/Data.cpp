@@ -1,6 +1,6 @@
 #include "Data.h"
-#include <Lib/Importer.h>
 #include <kvs/Assert>
+#include <kvs/ImageImporter>
 
 
 Data::Data( const Input& input ):
@@ -55,7 +55,8 @@ void Data::setSliceIndex( const size_t sindex )
 
 kvs::ImageObject* Data::import( const std::string name )
 {
-    kvs::ImageObject* image = ReadIPLab::ImportImageObject( m_ipl, m_sindex );
+    m_ipl.setImportingFrameIndex( m_sindex );
+    kvs::ImageObject* image = new kvs::ImageImporter( &m_ipl );
     image->setName( name );
     return image;
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include <Lib/IPLab.h>
-#include <Lib/IPLabList.h>
+#include <kvs/IPLab>
+#include <kvs/IPLabList>
 #include <kvs/ImageObject>
 #include <string>
 #include "Input.h"
@@ -11,8 +11,8 @@ class Data
 private:
 
     std::string m_dirname;
-    ReadIPLab::IPLabList m_ipl_list;
-    ReadIPLab::IPLab m_ipl;
+    kvs::IPLabList m_ipl_list;
+    kvs::IPLab m_ipl;
     size_t m_tindex;
     size_t m_sindex;
 
@@ -21,8 +21,8 @@ public:
     Data( const Input& input );
 
     const std::string& dirname() const { return m_dirname; }
-    const ReadIPLab::IPLabList& IPLabList() const { return m_ipl_list; }
-    const ReadIPLab::IPLab& IPLab() const { return m_ipl; }
+    const kvs::IPLabList& IPLabList() const { return m_ipl_list; }
+    const kvs::IPLab& IPLab() const { return m_ipl; }
     size_t timeIndex() const { return m_tindex; }
     size_t sliceIndex() const { return m_sindex; }
 
